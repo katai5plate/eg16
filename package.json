@@ -1,0 +1,21 @@
+{
+  "name": "eg16",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
+  },
+  "dependencies": {
+    "detect-collisions": "^9.1.1",
+    "keycode": "^2.2.1",
+    "pixi.js": "^7.2.4",
+    "ts-key-enum": "^2.0.12"
+  }
+}
