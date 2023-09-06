@@ -90,9 +90,9 @@ export class GameManager {
    * 画面上のゲームオブジェクトの当たり判定をテストする
    * @param fn
    */
-  hitTest(fn: (a: Body, b: Body, overlap: Point) => void) {
+  hitTest(fn: (arg: { self: Body; target: Body; overlap: Point }) => void) {
     this.physicsEngine.checkAll(({ a, b, overlapV }) => {
-      fn(a, b, xy(overlapV.x, overlapV.y));
+      fn({ self: a, target: b, overlap: xy(overlapV.x, overlapV.y) });
     });
   }
   /**

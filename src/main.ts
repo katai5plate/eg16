@@ -77,8 +77,8 @@ const player = new Player();
 $.startMainLoop(() => {
   player.setPosition((position) => xy.add(position, $.input.getAxis("WASD")));
   player.setAngle(() => $.now);
-  $.hitTest((col, _, overlap) => {
-    if (col === player.collider) {
+  $.hitTest(({ self, overlap }) => {
+    if (self === player.collider) {
       player.setPosition((position) => xy.sub(position, overlap));
     }
   });
