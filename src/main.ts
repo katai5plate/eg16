@@ -1,15 +1,16 @@
 import "./style.css";
-import { Graphics, Point, Sprite, Texture } from "pixi.js";
+import { Graphics, Sprite, Texture } from "pixi.js";
 import { GameManager } from "./managers/GameManager";
 import { GameObject } from "./components/GameObject";
+import { xy } from "./utils/math";
 
 class Wall extends GameObject {
   constructor(color: number, x: number, y: number, w: number, h: number) {
     super({
       name: "wall",
       placement: {
-        position: new Point(x, y),
-        size: new Point(w, h),
+        position: xy(x, y),
+        size: xy(w, h),
       },
       shape: "BOX",
       render: ((_) => {
@@ -28,8 +29,8 @@ class Sphere extends GameObject {
     super({
       name: "sphere",
       placement: {
-        position: new Point(x, y),
-        size: new Point(r, r),
+        position: xy(x, y),
+        size: xy(r, r),
       },
       shape: "CIRCLE",
       render: ((_) => {
@@ -48,9 +49,9 @@ class Player extends GameObject {
     super({
       name: "player",
       placement: {
-        position: new Point(40, 67),
-        size: new Point(16, 16),
-        pivot: new Point(0.5, 0.5),
+        position: xy(40, 67),
+        size: xy(16, 16),
+        pivot: xy(0.5, 0.5),
       },
       shape: "BOX",
       render: new Sprite(Texture.WHITE),
@@ -75,14 +76,13 @@ const player = new Player();
 ].forEach((gameObject) => $.spawn(gameObject));
 
 $.startMainLoop(() => {
-  player.setPosition(
-    ({ x, y }) =>
-      new Point(x + $.input.getAxis("WASD").x, y + $.input.getAxis("WASD").y)
+  player.setPosition(({ x, y }) =>
+    xy(x + $.input.getAxis("WASD").x, y + $.input.getAxis("WASD").y)
   );
   player.setAngle(() => Date.now() / 10);
   $.hitTest((col, _, overlap) => {
     if (col === player.collider) {
-      player.setPosition(({ x, y }) => new Point(x - overlap.x, y - overlap.y));
+      player.setPosition(({ x, y }) => xy(x - overlap.x, y - overlap.y));
     }
   });
 });

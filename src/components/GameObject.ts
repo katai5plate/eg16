@@ -8,6 +8,7 @@ import {
 } from "detect-collisions";
 import { Container, Point } from "pixi.js";
 import { Placement, PlacementProps } from "./Placement";
+import { xy } from "../utils/math";
 
 interface GameObjectProps {
   name?: string;
@@ -46,13 +47,13 @@ export class GameObject {
     this.collider.system?.remove(this.collider);
   }
   get position() {
-    const { x, y } = this.placement.rect;
-    return new Point(x, y);
+    const { x, y } = this.placement.posize;
+    return xy(x, y);
   }
   setPosition(fn: (prev: Point) => Point) {
     const { x, y } = fn(this.position);
-    this.placement.rect.x = x;
-    this.placement.rect.y = y;
+    this.placement.posize.x = x;
+    this.placement.posize.y = y;
     this.apply();
   }
   get angle() {
@@ -82,16 +83,16 @@ export class GameObject {
     this.apply();
   }
   apply() {
-    const { rect, angle, scale, origin } = this.placement;
-    this.render.position.set(rect.x, rect.y);
-    this.collider.setPosition(rect.x, rect.y);
+    const { posize, angle, scale, origin } = this.placement;
+    this.render.position.set(posize.x, posize.y);
+    this.collider.setPosition(posize.x, posize.y);
     this.render.angle = angle;
     this.collider.setAngle(deg2rad(angle));
     this.render.scale.set(scale.x, scale.y);
     this.collider.setScale(scale.x, scale.y);
-    this.render.pivot.set(rect.width * origin.x, rect.height * origin.y);
+    this.render.pivot.set(posize.width * origin.x, posize.height * origin.y);
     this.collider.setOffset(
-      new SATVector(rect.width * -origin.x, rect.height * -origin.y)
+      new SATVector(posize.width * -origin.x, posize.height * -origin.y)
     );
   }
 }

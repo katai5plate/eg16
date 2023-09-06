@@ -1,4 +1,4 @@
-import { Application, Point } from "pixi.js";
+import { Application } from "pixi.js";
 import { KeyboardManager, KeyCodeNames } from "./keyboard";
 import {
   GamepadManager,
@@ -6,6 +6,7 @@ import {
   getVelocityWithinRange,
 } from "./gamepad";
 import { MouseButtonNames, MouseManager } from "./mouse";
+import { xy } from "../../utils/math";
 
 export class InputManager {
   private keyboard: KeyboardManager;
@@ -54,9 +55,9 @@ export class InputManager {
   }
   getPadStick(player: number, stick: number, threshold = 0.2) {
     const polar = this.gamepad._sticks.get(player)?.[stick];
-    if (!polar) return new Point();
+    if (!polar) return xy(0, 0);
     const { dx, dy } = polar;
-    return new Point(
+    return xy(
       dx >= threshold || dx <= threshold ? dx : 0,
       dy >= threshold || dy <= threshold ? dy : 0
     );
@@ -90,7 +91,7 @@ export class InputManager {
   }
   getMouseMoveDelta(threshold = 0.2, limit = Infinity) {
     const { x, y } = this.mouse._deltaPosition;
-    return new Point(
+    return xy(
       x >= threshold
         ? Math.min(limit, x)
         : x <= -threshold
@@ -126,7 +127,7 @@ export class InputManager {
       threshold?: number;
     } = {}
   ) {
-    const p = new Point();
+    const p = xy(0, 0);
     switch (mode) {
       case "WASD": {
         if (this.isKeyPressed("w")) p.y = -1;

@@ -1,4 +1,5 @@
 import { Application, Point, Sprite, Texture } from "pixi.js";
+import { xy } from "../../utils/math";
 
 enum Buttons {
   LEFT = 0,
@@ -20,10 +21,10 @@ export class MouseManager {
   _deltaPosition: Point;
   constructor(app: Application) {
     this._buttons = new Map();
-    this._wheelDelta = new Point();
-    this._position = new Point();
-    this._prevPosition = new Point();
-    this._deltaPosition = new Point();
+    this._wheelDelta = xy(0, 0);
+    this._position = xy(0, 0);
+    this._prevPosition = xy(0, 0);
+    this._deltaPosition = xy(0, 0);
     document.addEventListener("mousedown", (e) => {
       const buttonName = Buttons[e.button] as MouseButtonNames;
       if (e.button < 3 && !this._buttons.has(buttonName)) {

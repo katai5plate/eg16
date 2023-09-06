@@ -2,6 +2,7 @@ import { Body, System } from "detect-collisions";
 import { Application, Point } from "pixi.js";
 import { InputManager } from "../InputManager";
 import { GameObject } from "../../components/GameObject";
+import { xy } from "../../utils/math";
 
 export class GameManager {
   private drawingEngine: Application;
@@ -39,7 +40,7 @@ export class GameManager {
    */
   hitTest(fn: (a: Body, b: Body, overlap: Point) => void) {
     this.physicsEngine.checkAll(({ a, b, overlapV }) => {
-      fn(a, b, new Point(overlapV.x, overlapV.y));
+      fn(a, b, xy(overlapV.x, overlapV.y));
     });
   }
   /**
