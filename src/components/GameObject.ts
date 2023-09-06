@@ -1,11 +1,4 @@
-import {
-  Body,
-  Box,
-  Ellipse,
-  Polygon,
-  SATVector,
-  deg2rad,
-} from "detect-collisions";
+import { Body, Box, Ellipse, SATVector, deg2rad } from "detect-collisions";
 import { Container, Point } from "pixi.js";
 import { Placement, PlacementProps } from "./Placement";
 import { xy } from "../utils/math";
@@ -13,7 +6,8 @@ import { xy } from "../utils/math";
 interface GameObjectProps {
   name?: string;
   placement: PlacementProps;
-  shape: "BOX" | "CIRCLE" | Point[];
+  // Polygon は動作が不安定なので使用を制限する
+  shape: "BOX" | "CIRCLE";
   render: Container;
 }
 
@@ -39,7 +33,7 @@ export class GameObject {
         placement.size.x,
         placement.size.y
       );
-    else this.collider = new Polygon(placement.position, shape);
+    else throw new Error("無効な形状タイプ");
     this.apply();
   }
   destroy() {

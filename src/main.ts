@@ -59,7 +59,7 @@ class Player extends GameObject {
   }
 }
 
-const $ = new GameManager();
+const $ = new GameManager({ physicsDebug: true });
 const player = new Player();
 
 [
@@ -76,7 +76,7 @@ const player = new Player();
 
 $.startMainLoop(() => {
   player.setPosition((position) => xy.add(position, $.input.getAxis("WASD")));
-  player.setAngle(() => Date.now() / 10);
+  player.setAngle(() => $.now);
   $.hitTest((col, _, overlap) => {
     if (col === player.collider) {
       player.setPosition((position) => xy.sub(position, overlap));
