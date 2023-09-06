@@ -12,12 +12,12 @@ export class InputManager {
   private gamepad: GamepadManager;
   private mouse: MouseManager;
 
-  constructor(app: Application) {
+  constructor(pixiApp: Application) {
     this.keyboard = new KeyboardManager();
     this.gamepad = new GamepadManager();
-    this.mouse = new MouseManager(app);
+    this.mouse = new MouseManager(pixiApp);
   }
-  update() {
+  _update() {
     this.keyboard._update();
     this.gamepad._update();
     this.mouse._update();

@@ -48,6 +48,7 @@ export class MouseManager {
         this._buttons.set("WHEEL_RIGHT", 0);
     });
     const touchScreen = new Sprite(Texture.WHITE);
+    touchScreen.name = "MouseManager: touchScreen";
     touchScreen.width = app.screen.width;
     touchScreen.height = app.screen.height;
     touchScreen.alpha = 0;
