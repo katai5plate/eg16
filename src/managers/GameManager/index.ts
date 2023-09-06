@@ -10,16 +10,16 @@ export class GameManager {
   private drawingEngine: Application;
   private physicsEngine: System;
 
-  input: InputManager;
-
   private mainLoop?: () => void;
 
-  isPhysicsDebug: boolean;
-  physicsDebugCanvas?: HTMLCanvasElement;
-  physicsDebugContext?: CanvasRenderingContext2D;
+  private isPhysicsDebug: boolean;
+  private physicsDebugCanvas?: HTMLCanvasElement;
+  private physicsDebugContext?: CanvasRenderingContext2D;
 
-  private frameCount: number;
-  private deltaTime: number;
+  private frameCount: number = 0;
+  private deltaTime: number = 0;
+
+  input: InputManager;
 
   constructor(options?: { physicsDebug: true }) {
     this.drawingEngine = new Application({ width: 128, height: 96 });
@@ -28,8 +28,6 @@ export class GameManager {
     this.drawingEngine.stage.name = "GameManager: stage";
 
     this.physicsEngine = new System();
-
-    this.input = new InputManager(this.drawingEngine);
 
     this.isPhysicsDebug = !!options?.physicsDebug;
     if (this.isPhysicsDebug) {
@@ -42,8 +40,7 @@ export class GameManager {
       document.body.appendChild(this.physicsDebugCanvas);
     }
 
-    this.frameCount = 0;
-    this.deltaTime = 0;
+    this.input = new InputManager(this.drawingEngine);
   }
   /**
    * メインループを開始する
