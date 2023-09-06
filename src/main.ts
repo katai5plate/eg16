@@ -60,7 +60,6 @@ class Player extends GameObject {
 }
 
 const $ = new GameManager();
-
 const player = new Player();
 
 [
@@ -76,13 +75,11 @@ const player = new Player();
 ].forEach((gameObject) => $.spawn(gameObject));
 
 $.startMainLoop(() => {
-  player.setPosition(({ x, y }) =>
-    xy(x + $.input.getAxis("WASD").x, y + $.input.getAxis("WASD").y)
-  );
+  player.setPosition((position) => xy.add(position, $.input.getAxis("WASD")));
   player.setAngle(() => Date.now() / 10);
   $.hitTest((col, _, overlap) => {
     if (col === player.collider) {
-      player.setPosition(({ x, y }) => xy(x - overlap.x, y - overlap.y));
+      player.setPosition((position) => xy.sub(position, overlap));
     }
   });
 });
