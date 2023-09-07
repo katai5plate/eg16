@@ -49,8 +49,8 @@ export const getVelocityWithinRange = (
 };
 
 export class GamepadDevice {
-  private _buttonDict: Map<number, Map<string, number>>;
-  private _stickDict: Map<number, Stick[]>;
+  protected _buttonDict: Map<number, Map<string, number>>;
+  protected _stickDict: Map<number, Stick[]>;
 
   constructor() {
     this._buttonDict = new Map();

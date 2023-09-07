@@ -15,13 +15,13 @@ enum Buttons {
 export type MouseButtonNames = keyof typeof Buttons;
 
 export class MouseDevice {
-  private screenSize: Point;
-  private wheelDelta: Point;
-  private prevPosition: Point;
+  protected screenSize: Point;
+  protected wheelDelta: Point;
+  protected prevPosition: Point;
 
-  private _buttonDict: Map<MouseButtonNames, number>;
-  private _position: Point;
-  private _deltaPosition: Point;
+  protected _buttonDict: Map<MouseButtonNames, number>;
+  protected _position: Point;
+  protected _deltaPosition: Point;
 
   constructor(screenSize: Point, stage: Container) {
     this.screenSize = screenSize;

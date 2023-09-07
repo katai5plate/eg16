@@ -4,8 +4,8 @@ import { DrawingEngine } from "./DrawingEngine";
 const DEBUG_FINENESS = 10;
 
 export class PhysicsEngine extends System {
-  private physicsDebugCanvas?: HTMLCanvasElement;
-  private physicsDebugContext?: CanvasRenderingContext2D;
+  protected physicsDebugCanvas?: HTMLCanvasElement;
+  protected physicsDebugContext?: CanvasRenderingContext2D;
 
   constructor(drawingEngine: DrawingEngine, options?: { physicsDebug: true }) {
     super();

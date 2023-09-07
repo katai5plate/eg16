@@ -9,9 +9,9 @@ import { xy } from "../../utils/math";
 import { Container, Point } from "pixi.js";
 
 export class InputManager {
-  private keyboardDevice: KeyboardDevice;
-  private gamepadDevice: GamepadDevice;
-  private mouseDevice: MouseDevice;
+  protected keyboardDevice: KeyboardDevice;
+  protected gamepadDevice: GamepadDevice;
+  protected mouseDevice: MouseDevice;
 
   constructor(screenSize: Point, stage: Container) {
     this.keyboardDevice = new KeyboardDevice();

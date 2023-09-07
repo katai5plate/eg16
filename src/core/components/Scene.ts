@@ -5,9 +5,9 @@ import { Entity } from "./Entity";
 export class Scene {
   public stage: Container;
 
-  private entityDict: Map<string, Entity>;
+  protected entityDict: Map<string, Entity>;
 
-  private _name: string;
+  protected _name: string;
 
   constructor(name: string) {
     this.stage = new Container();

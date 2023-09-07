@@ -12,12 +12,12 @@ interface EntityProps {
 }
 
 export class Entity {
-  private placement: Placement;
-  private destroyed: boolean = false;
+  protected placement: Placement;
+  protected destroyed: boolean = false;
 
-  private _name: string;
-  private _collider: Body;
-  private _render: Container;
+  protected _name: string;
+  protected _collider: Body;
+  protected _render: Container;
 
   constructor({ name, placement, shape, render }: EntityProps) {
     this._name = name;

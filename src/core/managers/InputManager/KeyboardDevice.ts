@@ -5,7 +5,7 @@ import { ToReadonlyMap } from "../../utils/type";
 export type KeyCodeNames = keyof (typeof keycode)["codes"] | keyof typeof Key;
 
 export class KeyboardDevice {
-  private _buttonDict: Map<KeyCodeNames, number>;
+  protected _buttonDict: Map<KeyCodeNames, number>;
 
   constructor() {
     this._buttonDict = new Map();

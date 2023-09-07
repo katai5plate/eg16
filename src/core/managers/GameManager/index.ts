@@ -8,16 +8,16 @@ import { DrawingEngine } from "./DrawingEngine";
 import { PhysicsEngine } from "./PhysicsEngine";
 
 export class GameManager {
-  private drawingEngine: DrawingEngine;
-  private physicsEngine: PhysicsEngine;
+  protected drawingEngine: DrawingEngine;
+  protected physicsEngine: PhysicsEngine;
 
-  private frameCount: number = 0;
-  private deltaTime: number = 0;
+  protected frameCount: number = 0;
+  protected deltaTime: number = 0;
 
-  private currentScene: Scene;
-  private sceneDict: Map<string, Scene>;
+  protected currentScene: Scene;
+  protected sceneDict: Map<string, Scene>;
 
-  private _input: InputManager;
+  protected _input: InputManager;
 
   constructor(scenes: Scene[]) {
     this.drawingEngine = new DrawingEngine();
