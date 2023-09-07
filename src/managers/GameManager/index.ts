@@ -3,14 +3,13 @@ import { Application, Point } from "pixi.js";
 import { InputManager } from "../InputManager";
 import { GameObject } from "../../components/GameObject";
 import { xy } from "../../utils/math";
+import { Scene } from "../../components/Scene";
 
 const PHYSICS_DEBUG_CANVAS_SCALE = 10;
 
 export class GameManager {
   private drawingEngine: Application;
   private physicsEngine: System;
-
-  private mainLoop?: () => void;
 
   private isPhysicsDebug: boolean;
   private physicsDebugCanvas?: HTMLCanvasElement;
@@ -21,7 +20,10 @@ export class GameManager {
 
   input: InputManager;
 
-  constructor(options?: { physicsDebug: true }) {
+  scene: Scene;
+  scenes: Map<string, Scene>;
+
+  constructor(scenes: Scene[], options?: { physicsDebug: true }) {
     this.drawingEngine = new Application({ width: 128, height: 96 });
     (globalThis as any).__PIXI_APP__ = this.drawingEngine;
     document.body.appendChild(this.drawingEngine.view as HTMLCanvasElement);
@@ -41,20 +43,41 @@ export class GameManager {
     }
 
     this.input = new InputManager(this.drawingEngine);
+
+    if (scenes.length === 0)
+      throw new Error("シーンは必ず１つ以上登録してください");
+    this.scenes = new Map();
+    scenes.forEach((scene) => {
+      this.scenes.set(scene.name, scene);
+    });
+    this.scene = scenes[0];
+    this.connectScene();
+
+    this.drawingEngine.ticker.add((delta) => this.update(delta));
   }
-  /**
-   * メインループを開始する
-   * @param fn
-   */
-  startMainLoop(fn: () => void) {
-    if (!!this.mainLoop) throw new Error("main loop is defined");
-    this.mainLoop = fn;
-    this.drawingEngine.ticker.add((delta) => {
-      this.deltaTime = delta;
-      this.frameCount++;
-      this.input._update();
-      this.updatePhysicsDebug();
-      this.mainLoop?.();
+  update(delta: number) {
+    this.deltaTime = delta;
+    this.frameCount++;
+    this.input._update();
+    this.updatePhysicsDebug();
+    this.scene.update(this);
+  }
+  changeScene(name: string) {
+    const scene = this.scenes.get(name);
+    if (!scene) throw new Error("無効なシーン名です: " + name);
+    this.clearScene();
+    this.scene = scene;
+    this.connectScene();
+  }
+  private clearScene() {
+    this.scene.destoroy();
+    this.scene.stage.removeChild(this.scene.stage);
+    this.physicsEngine.clear();
+  }
+  private connectScene() {
+    this.drawingEngine.stage.addChild(this.scene.stage);
+    this.scene.setup(this).forEach((gameObject) => {
+      this.spawn(gameObject);
     });
   }
   private updatePhysicsDebug() {
@@ -98,7 +121,7 @@ export class GameManager {
    */
   spawn(gameObject: GameObject) {
     this.physicsEngine.insert(gameObject.collider);
-    this.drawingEngine.stage.addChild(gameObject.render);
+    this.scene.stage.addChild(gameObject.render);
   }
   get width() {
     return this.drawingEngine.screen.width;

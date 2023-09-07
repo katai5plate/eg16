@@ -4,7 +4,7 @@ import { Placement, PlacementProps } from "./Placement";
 import { xy } from "../utils/math";
 
 interface GameObjectProps {
-  name?: string;
+  name: string;
   placement: PlacementProps;
   // Polygon は動作が不安定なので使用を制限する
   shape: "BOX" | "CIRCLE";
@@ -12,15 +12,20 @@ interface GameObjectProps {
 }
 
 export class GameObject {
+  readonly name: string;
   private placement: Placement;
 
   readonly collider: Body;
   readonly render: Container;
 
+  private destroyed: boolean = false;
+
   constructor({ name, placement, shape, render }: GameObjectProps) {
+    this.name = name;
+
     this.placement = new Placement(placement);
     this.render = render;
-    name && (this.render.name = name);
+    this.render.name = name;
     if (shape === "BOX")
       this.collider = new Box(
         placement.position,
@@ -39,6 +44,7 @@ export class GameObject {
   destroy() {
     this.render.destroy();
     this.collider.system?.remove(this.collider);
+    this.destroyed = true;
   }
   get position() {
     const { x, y } = this.placement.posize;
@@ -77,6 +83,7 @@ export class GameObject {
     this.apply();
   }
   apply() {
+    if (this.destroyed) return;
     const { posize, angle, scale, origin } = this.placement;
     this.render.position.set(posize.x, posize.y);
     this.collider.setPosition(posize.x, posize.y);
