@@ -3,7 +3,7 @@ import { Container, Point } from "pixi.js";
 import { Placement, PlacementProps } from "./Placement";
 import { xy } from "../utils/math";
 
-interface GameObjectProps {
+interface EntityProps {
   name: string;
   placement: PlacementProps;
   // Polygon は動作が不安定なので使用を制限する
@@ -11,7 +11,7 @@ interface GameObjectProps {
   render: Container;
 }
 
-export class GameObject {
+export class Entity {
   readonly name: string;
   private placement: Placement;
 
@@ -20,7 +20,7 @@ export class GameObject {
 
   private destroyed: boolean = false;
 
-  constructor({ name, placement, shape, render }: GameObjectProps) {
+  constructor({ name, placement, shape, render }: EntityProps) {
     this.name = name;
 
     this.placement = new Placement(placement);

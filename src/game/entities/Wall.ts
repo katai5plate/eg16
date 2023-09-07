@@ -1,19 +1,19 @@
 import { Graphics } from "pixi.js";
-import { GameObject } from "../../core/components/GameObject";
+import { Entity } from "../../core/components/Entity";
 import { xy } from "../../core/utils/math";
 
-export class Sphere extends GameObject {
-  constructor(color: number, x: number, y: number, r: number) {
+export class Wall extends Entity {
+  constructor(color: number, x: number, y: number, w: number, h: number) {
     super({
-      name: "sphere",
+      name: "wall",
       placement: {
         position: xy(x, y),
-        size: xy(r, r),
+        size: xy(w, h),
       },
-      shape: "CIRCLE",
+      shape: "BOX",
       render: ((_) => {
         _.beginFill(color);
-        _.drawCircle(0, 0, r);
+        _.drawRect(0, 0, w, h);
         _.endFill();
         _.position.set(x, y);
         return _;

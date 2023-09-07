@@ -1,8 +1,8 @@
 import { Sprite, Texture } from "pixi.js";
-import { GameObject } from "../../core/components/GameObject";
+import { Entity } from "../../core/components/Entity";
 import { xy } from "../../core/utils/math";
 
-export class Player extends GameObject {
+export class Player extends Entity {
   constructor(x: number, y: number) {
     super({
       name: "player",

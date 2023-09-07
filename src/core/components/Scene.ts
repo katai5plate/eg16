@@ -1,42 +1,41 @@
 import { Container } from "pixi.js";
 import { GameManager } from "../managers/GameManager";
-import { GameObject } from "./GameObject";
+import { Entity } from "./Entity";
 
 export class Scene {
   name: string;
   stage: Container;
-  gameObjects: Map<string, GameObject>;
+  entities: Map<string, Entity>;
   constructor(name: string) {
     this.stage = new Container();
     this.name = name;
     this.stage.name = `Scene: ${this.name}`;
-    this.gameObjects = new Map();
+    this.entities = new Map();
   }
-  protected addGameObject(gameObject: GameObject, customName?: string) {
-    const name = customName || gameObject.name;
-    this.gameObjects.set(name, gameObject);
-    return this.getGameObject(name);
+  protected addEntity(entity: Entity, customName?: string) {
+    const name = customName || entity.name;
+    this.entities.set(name, entity);
+    return this.getEntity(name);
   }
-  protected removeGameObject(name: string) {
-    this.gameObjects.delete(name);
+  protected removeEntity(name: string) {
+    this.entities.delete(name);
   }
-  protected getGameObject(name: string) {
-    const gameObject = this.gameObjects.get(name);
-    if (!gameObject)
-      throw new Error("指定のゲームオブジェクトが存在しません: " + name);
-    return gameObject;
+  protected getEntity(name: string) {
+    const entity = this.entities.get(name);
+    if (!entity) throw new Error("指定の Entity が存在しません: " + name);
+    return entity;
   }
   destoroy() {
     this.stage.removeChildren();
-    this.gameObjects.forEach((gameObject) => {
-      gameObject.destroy();
+    this.entities.forEach((entity) => {
+      entity.destroy();
     });
-    this.gameObjects.clear();
+    this.entities.clear();
   }
   setup(
     //@ts-ignore
     $: GameManager
-  ): GameObject[] {
+  ): Entity[] {
     return [];
   }
   update(

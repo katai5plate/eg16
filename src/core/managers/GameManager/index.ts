@@ -1,7 +1,7 @@
 import { Body, System } from "detect-collisions";
 import { Application, Point } from "pixi.js";
 import { InputManager } from "../InputManager";
-import { GameObject } from "../../components/GameObject";
+import { Entity } from "../../components/Entity";
 import { xy } from "../../utils/math";
 import { Scene } from "../../components/Scene";
 
@@ -76,8 +76,8 @@ export class GameManager {
   }
   private connectScene() {
     this.drawingEngine.stage.addChild(this.scene.stage);
-    this.scene.setup(this).forEach((gameObject) => {
-      this.spawn(gameObject);
+    this.scene.setup(this).forEach((entity) => {
+      this.spawn(entity);
     });
   }
   private updatePhysicsDebug() {
@@ -107,7 +107,7 @@ export class GameManager {
     }
   }
   /**
-   * 画面上のゲームオブジェクトの当たり判定をテストする
+   * 画面上の Entity の当たり判定をテストする
    * @param fn
    */
   hitTest(fn: (arg: { self: Body; target: Body; overlap: Point }) => void) {
@@ -116,12 +116,12 @@ export class GameManager {
     });
   }
   /**
-   * 画面上にゲームオブジェクトをスポーンする
-   * @param gameObject
+   * 画面上に Entity をスポーンする
+   * @param entity
    */
-  spawn(gameObject: GameObject) {
-    this.physicsEngine.insert(gameObject.collider);
-    this.scene.stage.addChild(gameObject.render);
+  spawn(entity: Entity) {
+    this.physicsEngine.insert(entity.collider);
+    this.scene.stage.addChild(entity.render);
   }
   get width() {
     return this.drawingEngine.screen.width;
