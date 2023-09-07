@@ -1,5 +1,7 @@
 import { GameManager } from "../core/managers/GameManager";
-import { MainScene } from "./scene/MainScene";
-import { SubScene } from "./scene/SubScene";
+import { CollisionTest } from "./scene/CollisionTest";
 
-export const game = new GameManager([new MainScene(), new SubScene()]);
+export const game = new GameManager([
+  //
+  new CollisionTest(),
+]);
