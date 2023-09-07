@@ -28,7 +28,7 @@ xy.mod = (from: PointLike, to: PointLike) =>
   xy.from(calc(from, (prev) => xy(prev.x % to.x, prev.y % to.y)));
 
 /** `Rectangle` を作成 */
-export const rect = (x: number, y: number, w: number, h: number) =>
+export const xywh = (x: number, y: number, w: number, h: number) =>
   new Rectangle(x, y, w, h);
 
 /** `[x, y, x, y, ...]` を `[{x, y}, {x, y}, ...]` に変換 */
