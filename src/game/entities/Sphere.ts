@@ -1,6 +1,6 @@
-import { Graphics } from "pixi.js";
 import { Entity } from "../../core/components/Entity";
 import { xy } from "../../core/utils/math";
+import { PaintSprite } from "../../core/components/PaintSprite";
 
 export class Sphere extends Entity {
   constructor(color: number, x: number, y: number, r: number) {
@@ -9,15 +9,16 @@ export class Sphere extends Entity {
       placement: {
         position: xy(x, y),
         size: xy(r, r),
+        origin: xy(0.5, 0.5),
+        scale: xy(0.5, 0.5),
       },
       shape: "CIRCLE",
-      render: ((_) => {
-        _.beginFill(color);
-        _.drawCircle(0, 0, r);
-        _.endFill();
-        _.position.set(x, y);
-        return _;
-      })(new Graphics()),
+      render: new PaintSprite(xy(r * 2, r * 2), (ctx) => {
+        ctx.fillStyle = `#${color.toString(16)}`;
+        ctx.beginPath();
+        ctx.ellipse(r, r, r, r, 0, 0, 2 * Math.PI);
+        ctx.fill();
+      }),
     });
   }
 }

@@ -1,5 +1,5 @@
 import { Body } from "detect-collisions";
-import { Container, Point } from "pixi.js";
+import { Point, Sprite } from "pixi.js";
 import { InputManager } from "../InputManager";
 import { Entity } from "../../components/Entity";
 import { xy } from "../../utils/math";
@@ -82,7 +82,7 @@ export class GameManager {
    */
   spawn(entity: Entity) {
     this.physicsEngine.insert(entity.collider as Body);
-    this.currentScene.stage.addChild(entity.render as Container);
+    this.currentScene.stage.addChild(entity.render as Sprite);
   }
   get input(): Readonly<typeof this._input> {
     return this._input;

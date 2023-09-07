@@ -1,5 +1,5 @@
 import { Body, Box, Ellipse, SATVector, deg2rad } from "detect-collisions";
-import { Container, Point } from "pixi.js";
+import { Point, Sprite } from "pixi.js";
 import { Placement, PlacementProps } from "./Placement";
 import { xy } from "../utils/math";
 
@@ -8,7 +8,7 @@ interface EntityProps {
   placement: PlacementProps;
   // Polygon は動作が不安定なので使用を制限する
   shape: "BOX" | "CIRCLE";
-  render: Container;
+  render: Sprite;
 }
 
 export class Entity {
@@ -17,7 +17,7 @@ export class Entity {
 
   protected _name: string;
   protected _collider: Body;
-  protected _render: Container;
+  protected _render: Sprite;
 
   constructor({ name, placement, shape, render }: EntityProps) {
     this._name = name;
@@ -99,12 +99,21 @@ export class Entity {
     this._collider.setAngle(deg2rad(angle));
     this._render.scale.set(scale.x, scale.y);
     this._collider.setScale(scale.x, scale.y);
-    this._render.pivot.set(posize.width * origin.x, posize.height * origin.y);
-    this._collider.setOffset(
-      new SATVector(
-        posize.width * scale.x * -origin.x,
-        posize.height * scale.y * -origin.y
-      )
-    );
+    this._render.anchor.set(origin.x, origin.y);
+    if (this._collider.type === "Ellipse") {
+      this._collider.setOffset(
+        new SATVector(
+          posize.width * scale.x * (1 - 2 * origin.x),
+          posize.height * scale.y * (1 - 2 * origin.y)
+        )
+      );
+    } else {
+      this._collider.setOffset(
+        new SATVector(
+          posize.width * scale.x * -origin.x,
+          posize.height * scale.y * -origin.y
+        )
+      );
+    }
   }
 }

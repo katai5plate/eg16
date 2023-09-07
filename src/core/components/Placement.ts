@@ -6,7 +6,7 @@ export interface PlacementProps {
   size: Point;
   angle?: number;
   scale?: Point;
-  pivot?: Point;
+  origin?: Point;
 }
 
 export class Placement {
@@ -20,11 +20,11 @@ export class Placement {
     size,
     angle = 0,
     scale = xy(1, 1),
-    pivot = xy(0, 0),
+    origin = xy(0, 0),
   }: PlacementProps) {
     this.posize = rect(position.x, position.y, size.x, size.y);
     this.angle = angle;
     this.scale = scale;
-    this.origin = pivot;
+    this.origin = origin;
   }
 }

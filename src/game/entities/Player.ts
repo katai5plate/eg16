@@ -9,7 +9,7 @@ export class Player extends Entity {
       placement: {
         position: xy(x, y),
         size: xy(8, 8),
-        pivot: xy(0.5, 0.5),
+        origin: xy(0.5, 0.5),
         scale: xy(2, 2),
       },
       shape: "BOX",
