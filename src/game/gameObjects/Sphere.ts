@@ -1,6 +1,6 @@
 import { Graphics } from "pixi.js";
-import { GameObject } from "../core/components/GameObject";
-import { xy } from "../core/utils/math";
+import { GameObject } from "../../core/components/GameObject";
+import { xy } from "../../core/utils/math";
 
 export class Sphere extends GameObject {
   constructor(color: number, x: number, y: number, r: number) {

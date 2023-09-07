@@ -1,32 +1,18 @@
-import { Sprite, Texture } from "pixi.js";
-import { GameObject } from "../core/components/GameObject";
-import { Scene } from "../core/components/Scene";
-import { GameManager } from "../core/managers/GameManager";
-import { xy } from "../core/utils/math";
-import { Wall } from "./Wall";
-import { Sphere } from "./Sphere";
+import { Scene } from "../../core/components/Scene";
+import { GameManager } from "../../core/managers/GameManager";
+import { xy } from "../../core/utils/math";
+import { Wall } from "../gameObjects/Wall";
+import { Sphere } from "../gameObjects/Sphere";
+import { Player } from "../gameObjects/Player";
 
 export class MainScene extends Scene {
   constructor() {
     super("main");
   }
   setup($: GameManager) {
-    this.addGameObject(
-      new GameObject({
-        name: "player",
-        placement: {
-          position: xy(40, 67),
-          size: xy(16, 16),
-          pivot: xy(0.5, 0.5),
-        },
-        shape: "BOX",
-        render: new Sprite(Texture.WHITE),
-      })
-    );
-    this.addGameObject(new Wall(0xffaa00, 0, 0, $.width, 0), "topWall");
     return [
-      this.getGameObject("player"),
-      this.getGameObject("topWall"),
+      this.addGameObject(new Player(40, 67)),
+      this.addGameObject(new Wall(0xffaa00, 0, 0, $.width, 0), "topWall"),
       new Wall(0xffaa00, 0, $.height, $.width, 0),
       new Wall(0xffaa00, 0, 0, 16, 96),
       new Wall(0xffaa00, 112, 0, 16, 96),

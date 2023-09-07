@@ -13,7 +13,9 @@ export class Scene {
     this.gameObjects = new Map();
   }
   protected addGameObject(gameObject: GameObject, customName?: string) {
-    this.gameObjects.set(customName || gameObject.name, gameObject);
+    const name = customName || gameObject.name;
+    this.gameObjects.set(name, gameObject);
+    return this.getGameObject(name);
   }
   protected removeGameObject(name: string) {
     this.gameObjects.delete(name);
