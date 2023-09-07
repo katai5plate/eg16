@@ -7,7 +7,7 @@ import { Ball } from "../entities/Ball";
 
 export class CollisionTest extends Scene {
   constructor() {
-    super("main");
+    super("col-test");
   }
   setup($: GameManager) {
     return [

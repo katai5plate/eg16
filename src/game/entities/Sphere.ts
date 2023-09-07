@@ -1,6 +1,7 @@
 import { Entity } from "../../core/components/Entity";
 import { xy } from "../../core/utils/math";
 import { PaintSprite } from "../../core/components/PaintSprite";
+import { fillIn } from "../../core/utils/canvas";
 
 export class Sphere extends Entity {
   constructor(color: number, x: number, y: number, r: number) {
@@ -13,10 +14,15 @@ export class Sphere extends Entity {
       },
       shape: "CIRCLE",
       render: new PaintSprite(xy(r * 2, r * 2), (ctx) => {
-        ctx.fillStyle = `#${color.toString(16)}`;
-        ctx.beginPath();
-        ctx.ellipse(r, r, r, r, 0, 0, 2 * Math.PI);
-        ctx.fill();
+        fillIn(
+          ctx,
+          color,
+          () => {
+            ctx.beginPath();
+            ctx.ellipse(r, r, r, r, 0, 0, 2 * Math.PI);
+          },
+          true
+        );
       }),
     });
   }

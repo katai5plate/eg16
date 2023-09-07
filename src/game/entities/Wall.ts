@@ -1,6 +1,7 @@
 import { Entity } from "../../core/components/Entity";
 import { xy } from "../../core/utils/math";
 import { PaintSprite } from "../../core/components/PaintSprite";
+import { fillIn } from "../../core/utils/canvas";
 
 export class Wall extends Entity {
   constructor(color: number, x: number, y: number, w: number, h: number) {
@@ -12,8 +13,7 @@ export class Wall extends Entity {
       },
       shape: "BOX",
       render: new PaintSprite(xy(w, h), (ctx) => {
-        ctx.fillStyle = `#${color.toString(16)}`;
-        ctx.fillRect(0, 0, w, h);
+        fillIn(ctx, color, () => ctx.fillRect(0, 0, w, h));
       }),
     });
   }

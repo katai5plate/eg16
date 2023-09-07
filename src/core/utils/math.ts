@@ -34,3 +34,9 @@ export const rect = (x: number, y: number, w: number, h: number) =>
 /** `[x, y, x, y, ...]` を `[{x, y}, {x, y}, ...]` に変換 */
 export const numsToPoints = (nums: number[]) =>
   nums.filter((_, i) => i % 2 === 0).map((val, i) => xy(val, nums[i * 2 + 1]));
+
+export const testPointInRect = (point: Point, rect: Rectangle) =>
+  point.x >= rect.x &&
+  point.x <= rect.x + rect.width &&
+  point.y >= rect.y &&
+  point.y <= rect.y + rect.height;

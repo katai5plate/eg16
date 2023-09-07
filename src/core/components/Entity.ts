@@ -1,5 +1,5 @@
 import { Body, Box, Ellipse, SATVector, deg2rad } from "detect-collisions";
-import { Point, Sprite } from "pixi.js";
+import { Point, Rectangle, Sprite } from "pixi.js";
 import { Placement, PlacementProps } from "./Placement";
 import { xy } from "../utils/math";
 
@@ -48,6 +48,9 @@ export class Entity {
   }
   get render(): Readonly<typeof this._render> {
     return this._render;
+  }
+  get globalRect(): Readonly<Rectangle> {
+    return this.placement.posize;
   }
   destroy() {
     this._render.destroy();
