@@ -1,8 +1,15 @@
-import fs from "fs";
 import Unfonts from "unplugin-fonts/vite";
+import fonts from "./fonts.json";
 
-const OVERWRITE_FONT_PATH = "./src/game/assets/font.ttf";
-const isOverwritten = fs.existsSync(OVERWRITE_FONT_PATH);
+const families = Object.entries(fonts).reduce(
+  (p, [k, v]) => ({
+    ...p,
+    [k]: {
+      src: `./public/fonts/${v.file}`,
+    },
+  }),
+  {}
+);
 
 export default {
   base: "./",
@@ -19,14 +26,7 @@ export default {
   plugins: [
     Unfonts({
       custom: {
-        families: {
-          GameFont: {
-            src: "./src/core/assets/font.ttf",
-          },
-          CustomFont: {
-            src: "./src/game/assets/font.ttf",
-          },
-        },
+        families,
       },
     }),
   ],
