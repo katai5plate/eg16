@@ -1,6 +1,6 @@
 import { Container, Point, Sprite, Texture } from "pixi.js";
-import { xy } from "../../utils/math";
-import { ToReadonlyMap } from "../../utils/type";
+import { xy } from "core/utils/math";
+import { ToReadonlyMap } from "core/utils/type";
 
 enum Buttons {
   LEFT = 0,

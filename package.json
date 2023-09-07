@@ -12,8 +12,9 @@
   "devDependencies": {
     "@types/node": "^20.5.9",
     "typescript": "^5.0.2",
+    "unplugin-fonts": "^1.0.3",
     "vite": "^4.4.5",
-    "unplugin-fonts": "^1.0.3"
+    "vite-tsconfig-paths": "^4.2.0"
   },
   "dependencies": {
     "detect-collisions": "^9.1.1",

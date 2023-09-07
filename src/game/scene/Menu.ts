@@ -1,7 +1,7 @@
-import { Scene } from "../../core/components/Scene";
-import { GameManager } from "../../core/managers/GameManager";
-import { xywh, testPointInRect } from "../../core/utils/math";
-import { Button } from "../../core/entities/ui/Button";
+import { Scene } from "core/components/Scene";
+import { GameManager } from "core/managers/GameManager";
+import { xywh, testPointInRect } from "core/utils/math";
+import { Button } from "core/entities/ui/Button";
 
 export class Menu extends Scene {
   constructor() {

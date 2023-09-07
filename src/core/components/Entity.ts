@@ -1,7 +1,7 @@
 import { Body, Box, Ellipse, SATVector, deg2rad } from "detect-collisions";
 import { Point, Rectangle, Sprite } from "pixi.js";
+import { xy } from "core/utils/math";
 import { Placement, PlacementProps } from "./Placement";
-import { xy } from "../utils/math";
 
 interface EntityProps {
   name: string;

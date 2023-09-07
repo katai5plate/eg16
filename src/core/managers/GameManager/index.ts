@@ -1,9 +1,9 @@
 import { Body } from "detect-collisions";
 import { Point, Sprite } from "pixi.js";
-import { InputManager } from "../InputManager";
-import { Entity } from "../../components/Entity";
-import { xy } from "../../utils/math";
-import { Scene } from "../../components/Scene";
+import { InputManager } from "core/managers/InputManager";
+import { Entity } from "core/components/Entity";
+import { xy } from "core/utils/math";
+import { Scene } from "core/components/Scene";
 import { DrawingEngine } from "./DrawingEngine";
 import { PhysicsEngine } from "./PhysicsEngine";
 

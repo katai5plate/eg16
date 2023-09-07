@@ -1,7 +1,7 @@
-import { Entity } from "../../core/components/Entity";
-import { xy } from "../../core/utils/math";
-import { PaintSprite } from "../../core/components/PaintSprite";
-import { fillIn } from "../../core/utils/canvas";
+import { Entity } from "core/components/Entity";
+import { xy } from "core/utils/math";
+import { PaintSprite } from "core/components/PaintSprite";
+import { fillIn } from "core/utils/canvas";
 
 export class Sphere extends Entity {
   constructor(color: number, x: number, y: number, r: number) {

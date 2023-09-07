@@ -1,6 +1,6 @@
-import { BitmapSprite } from "../../core/components/BitmapSprite";
-import { Entity } from "../../core/components/Entity";
-import { xy } from "../../core/utils/math";
+import { BitmapSprite } from "core/components/BitmapSprite";
+import { Entity } from "core/components/Entity";
+import { xy } from "core/utils/math";
 
 export class Ball extends Entity {
   constructor(x: number, y: number) {

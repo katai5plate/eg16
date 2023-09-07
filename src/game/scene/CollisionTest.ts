@@ -1,9 +1,9 @@
-import { Scene } from "../../core/components/Scene";
-import { GameManager } from "../../core/managers/GameManager";
-import { xy } from "../../core/utils/math";
-import { Wall } from "../entities/Wall";
-import { Sphere } from "../entities/Sphere";
-import { Ball } from "../entities/Ball";
+import { Scene } from "core/components/Scene";
+import { GameManager } from "core/managers/GameManager";
+import { xy } from "core/utils/math";
+import { Wall } from "game/entities/Wall";
+import { Sphere } from "game/entities/Sphere";
+import { Ball } from "game/entities/Ball";
 
 export class CollisionTest extends Scene {
   constructor() {

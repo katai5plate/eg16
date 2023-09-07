@@ -1,5 +1,5 @@
 import { Container } from "pixi.js";
-import { GameManager } from "../managers/GameManager";
+import { GameManager } from "core/managers/GameManager";
 import { Entity } from "./Entity";
 
 export class Scene {

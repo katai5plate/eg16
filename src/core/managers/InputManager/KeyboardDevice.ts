@@ -1,6 +1,6 @@
 import keycode from "keycode";
 import { Key } from "ts-key-enum";
-import { ToReadonlyMap } from "../../utils/type";
+import { ToReadonlyMap } from "core/utils/type";
 
 export type KeyCodeNames = keyof (typeof keycode)["codes"] | keyof typeof Key;
 

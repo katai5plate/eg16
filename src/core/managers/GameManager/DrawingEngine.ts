@@ -1,5 +1,5 @@
 import { Application, BaseTexture, SCALE_MODES } from "pixi.js";
-import fonts from "../../../../fonts.json";
+import fonts from "root/fonts.json";
 
 export class DrawingEngine extends Application {
   constructor() {

@@ -1,5 +1,5 @@
-import { numsToPoints } from "../../utils/math";
-import { ToReadonlyMap } from "../../utils/type";
+import { numsToPoints } from "core/utils/math";
+import { ToReadonlyMap } from "core/utils/type";
 
 interface Stick {
   dx: number;

@@ -1,8 +1,8 @@
 import { Rectangle } from "pixi.js";
-import { Entity } from "../../components/Entity";
-import { PaintSprite } from "../../components/PaintSprite";
-import { xy, xywh } from "../../utils/math";
-import { fillIn, fillRoundedRect, textIn } from "../../utils/canvas";
+import { Entity } from "core/components/Entity";
+import { PaintSprite } from "core/components/PaintSprite";
+import { xy, xywh } from "core/utils/math";
+import { fillIn, fillRoundedRect, textIn } from "core/utils/canvas";
 
 export class Button extends Entity {
   constructor(

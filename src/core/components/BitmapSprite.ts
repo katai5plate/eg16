@@ -1,5 +1,5 @@
 import { SCALE_MODES, Sprite, Texture } from "pixi.js";
-import bitmaps from "../../game/assets/bitmaps.json";
+import bitmaps from "game/assets/bitmaps.json";
 
 export class BitmapSprite extends Sprite {
   constructor(name: keyof typeof bitmaps, antialias = false) {

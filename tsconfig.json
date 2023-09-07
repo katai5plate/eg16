@@ -1,5 +1,13 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "game/*": ["./src/game/*"],
+      "core/*": ["./src/core/*"],
+      "src/*": ["./src/*"],
+      "root/*": ["./*"]
+    },
+
     "target": "ES2020",
     "useDefineForClassFields": true,
     "module": "ESNext",

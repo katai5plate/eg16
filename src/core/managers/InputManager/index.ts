@@ -1,3 +1,5 @@
+import { Container, Point } from "pixi.js";
+import { xy } from "core/utils/math";
 import { KeyboardDevice, KeyCodeNames } from "./KeyboardDevice";
 import {
   GamepadDevice,
@@ -5,8 +7,6 @@ import {
   getVelocityWithinRange,
 } from "./GamepadDevice";
 import { MouseButtonNames, MouseDevice } from "./MouseDevice";
-import { xy } from "../../utils/math";
-import { Container, Point } from "pixi.js";
 
 export class InputManager {
   protected keyboardDevice: KeyboardDevice;
