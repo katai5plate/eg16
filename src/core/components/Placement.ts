@@ -10,10 +10,11 @@ export interface PlacementProps {
 }
 
 export class Placement {
-  posize: Rectangle;
-  angle: number;
-  scale: Point;
-  origin: Point;
+  public posize: Rectangle;
+  public angle: number;
+  public scale: Point;
+  public origin: Point;
+
   constructor({
     position,
     size,

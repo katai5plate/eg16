@@ -1,60 +1,60 @@
-import { Application } from "pixi.js";
-import { KeyboardManager, KeyCodeNames } from "./keyboard";
+import { KeyboardDevice, KeyCodeNames } from "./KeyboardDevice";
 import {
-  GamepadManager,
+  GamepadDevice,
   PadButtonNames,
   getVelocityWithinRange,
-} from "./gamepad";
-import { MouseButtonNames, MouseManager } from "./mouse";
+} from "./GamepadDevice";
+import { MouseButtonNames, MouseDevice } from "./MouseDevice";
 import { xy } from "../../utils/math";
+import { Container, Point } from "pixi.js";
 
 export class InputManager {
-  private keyboard: KeyboardManager;
-  private gamepad: GamepadManager;
-  private mouse: MouseManager;
+  private keyboardDevice: KeyboardDevice;
+  private gamepadDevice: GamepadDevice;
+  private mouseDevice: MouseDevice;
 
-  constructor(pixiApp: Application) {
-    this.keyboard = new KeyboardManager();
-    this.gamepad = new GamepadManager();
-    this.mouse = new MouseManager(pixiApp);
+  constructor(screenSize: Point, stage: Container) {
+    this.keyboardDevice = new KeyboardDevice();
+    this.gamepadDevice = new GamepadDevice();
+    this.mouseDevice = new MouseDevice(screenSize, stage);
   }
   _update() {
-    this.keyboard._update();
-    this.gamepad._update();
-    this.mouse._update();
+    this.keyboardDevice.update();
+    this.gamepadDevice.update();
+    this.mouseDevice.update();
   }
   isKeyTriggered(key: KeyCodeNames) {
-    return (this.keyboard._buttons.get(key) ?? NaN) === 1;
+    return (this.keyboardDevice.buttonDict.get(key) ?? NaN) === 1;
   }
   isKeyPressed(key: KeyCodeNames, frames = 1) {
-    return (this.keyboard._buttons.get(key) ?? NaN) > frames;
+    return (this.keyboardDevice.buttonDict.get(key) ?? NaN) > frames;
   }
   isKeyReleased(key: KeyCodeNames) {
-    return !this.keyboard._buttons.has(key);
+    return !this.keyboardDevice.buttonDict.has(key);
   }
   isPadTriggered(player: number, button: PadButtonNames) {
-    const pad = this.gamepad._buttons.get(player);
+    const pad = this.gamepadDevice.buttonDict.get(player);
     return (pad?.get(button) ?? NaN) === 1;
   }
   isPadPressed(player: number, button: PadButtonNames, frames = 1) {
-    const pad = this.gamepad._buttons.get(player);
+    const pad = this.gamepadDevice.buttonDict.get(player);
     return (pad?.get(button) ?? NaN) > frames;
   }
   isPadReleased(player: number, button: PadButtonNames) {
-    const pad = this.gamepad._buttons.get(player);
+    const pad = this.gamepadDevice.buttonDict.get(player);
     return !pad?.has(button);
   }
   isMouseTriggered(button: MouseButtonNames) {
-    return (this.mouse._buttons.get(button) ?? NaN) === 1;
+    return (this.mouseDevice.buttonDict.get(button) ?? NaN) === 1;
   }
   isMousePressed(button: MouseButtonNames, frames = 1) {
-    return (this.mouse._buttons.get(button) ?? NaN) > frames;
+    return (this.mouseDevice.buttonDict.get(button) ?? NaN) > frames;
   }
   isMouseReleased(button: MouseButtonNames) {
-    return !this.mouse._buttons.has(button);
+    return !this.mouseDevice.buttonDict.has(button);
   }
   getPadStick(player: number, stick: number, threshold = 0.2) {
-    const polar = this.gamepad._sticks.get(player)?.[stick];
+    const polar = this.gamepadDevice.stickDict.get(player)?.[stick];
     if (!polar) return xy(0, 0);
     const { dx, dy } = polar;
     return xy(
@@ -69,7 +69,7 @@ export class InputManager {
     range = 45,
     threshold = 0.2
   ) {
-    const polar = this.gamepad._sticks.get(player)?.[stick];
+    const polar = this.gamepadDevice.stickDict.get(player)?.[stick];
     if (!polar) return 0;
     const velocity = getVelocityWithinRange(polar, angle, range);
     return velocity >= threshold ? velocity : 0;
@@ -87,10 +87,10 @@ export class InputManager {
     return this.getPadStickAngle(player, stick, 45 * 6, range, threshold);
   }
   getMousePosition() {
-    return this.mouse._position;
+    return this.mouseDevice.position;
   }
   getMouseMoveDelta(threshold = 0.2, limit = Infinity) {
-    const { x, y } = this.mouse._deltaPosition;
+    const { x, y } = this.mouseDevice.deltaPosition;
     return xy(
       x >= threshold
         ? Math.min(limit, x)

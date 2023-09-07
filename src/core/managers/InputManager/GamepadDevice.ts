@@ -1,4 +1,5 @@
 import { numsToPoints } from "../../utils/math";
+import { ToReadonlyMap } from "../../utils/type";
 
 interface Stick {
   dx: number;
@@ -47,20 +48,28 @@ export const getVelocityWithinRange = (
   return 0;
 };
 
-export class GamepadManager {
-  _buttons: Map<number, Map<string, number>>;
-  _sticks: Map<number, Stick[]>;
+export class GamepadDevice {
+  private _buttonDict: Map<number, Map<string, number>>;
+  private _stickDict: Map<number, Stick[]>;
+
   constructor() {
-    this._buttons = new Map();
-    this._sticks = new Map();
+    this._buttonDict = new Map();
+    this._stickDict = new Map();
     window.addEventListener("gamepadconnected", () => {});
   }
-  _update() {
+  get buttonDict(): ToReadonlyMap<typeof this._buttonDict> {
+    return this._buttonDict;
+  }
+  get stickDict(): ToReadonlyMap<typeof this._stickDict> {
+    return this._stickDict;
+  }
+  update() {
     navigator.getGamepads().forEach((gamepad, player) => {
       if (!gamepad) return;
-      if (!this._buttons.has(player)) this._buttons.set(player, new Map());
+      if (!this._buttonDict.has(player))
+        this._buttonDict.set(player, new Map());
       gamepad.buttons.forEach((button, index) => {
-        const playerButtons = this._buttons.get(player);
+        const playerButtons = this._buttonDict.get(player);
         if (!playerButtons) return;
         const buttonName = Buttons[index];
         const hasButtonName = playerButtons.has(buttonName);
@@ -74,7 +83,7 @@ export class GamepadManager {
           playerButtons.set(buttonName, prev + 1);
         }
       });
-      this._sticks.set(
+      this._stickDict.set(
         player,
         numsToPoints(gamepad.axes as number[]).map(({ x, y }) => {
           return {

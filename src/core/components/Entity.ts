@@ -12,28 +12,27 @@ interface EntityProps {
 }
 
 export class Entity {
-  readonly name: string;
   private placement: Placement;
-
-  readonly collider: Body;
-  readonly render: Container;
-
   private destroyed: boolean = false;
 
+  private _name: string;
+  private _collider: Body;
+  private _render: Container;
+
   constructor({ name, placement, shape, render }: EntityProps) {
-    this.name = name;
+    this._name = name;
 
     this.placement = new Placement(placement);
-    this.render = render;
-    this.render.name = name;
+    this._render = render;
+    this._render.name = name;
     if (shape === "BOX")
-      this.collider = new Box(
+      this._collider = new Box(
         placement.position,
         placement.size.x,
         placement.size.y
       );
     else if (shape === "CIRCLE")
-      this.collider = new Ellipse(
+      this._collider = new Ellipse(
         placement.position,
         placement.size.x,
         placement.size.y
@@ -41,9 +40,18 @@ export class Entity {
     else throw new Error("無効な形状タイプ");
     this.apply();
   }
+  get name() {
+    return this._name;
+  }
+  get collider(): Readonly<typeof this._collider> {
+    return this._collider;
+  }
+  get render(): Readonly<typeof this._render> {
+    return this._render;
+  }
   destroy() {
-    this.render.destroy();
-    this.collider.system?.remove(this.collider);
+    this._render.destroy();
+    this._collider.system?.remove(this._collider);
     this.destroyed = true;
   }
   get position() {
@@ -85,14 +93,14 @@ export class Entity {
   apply() {
     if (this.destroyed) return;
     const { posize, angle, scale, origin } = this.placement;
-    this.render.position.set(posize.x, posize.y);
-    this.collider.setPosition(posize.x, posize.y);
-    this.render.angle = angle;
-    this.collider.setAngle(deg2rad(angle));
-    this.render.scale.set(scale.x, scale.y);
-    this.collider.setScale(scale.x, scale.y);
-    this.render.pivot.set(posize.width * origin.x, posize.height * origin.y);
-    this.collider.setOffset(
+    this._render.position.set(posize.x, posize.y);
+    this._collider.setPosition(posize.x, posize.y);
+    this._render.angle = angle;
+    this._collider.setAngle(deg2rad(angle));
+    this._render.scale.set(scale.x, scale.y);
+    this._collider.setScale(scale.x, scale.y);
+    this._render.pivot.set(posize.width * origin.x, posize.height * origin.y);
+    this._collider.setOffset(
       new SATVector(posize.width * -origin.x, posize.height * -origin.y)
     );
   }
