@@ -93,7 +93,7 @@ export class Entity {
   protected apply() {
     if (this.destroyed) return;
     const { posize, angle, scale, origin } = this.placement;
-    this._render.position.set(posize.x, posize.y);
+    this._render.position.set(posize.x | 0, posize.y | 0);
     this._collider.setPosition(posize.x, posize.y);
     this._render.angle = angle;
     this._collider.setAngle(deg2rad(angle));
@@ -101,7 +101,10 @@ export class Entity {
     this._collider.setScale(scale.x, scale.y);
     this._render.pivot.set(posize.width * origin.x, posize.height * origin.y);
     this._collider.setOffset(
-      new SATVector(posize.width * -origin.x, posize.height * -origin.y)
+      new SATVector(
+        posize.width * scale.x * -origin.x,
+        posize.height * scale.y * -origin.y
+      )
     );
   }
 }

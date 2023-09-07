@@ -1,4 +1,4 @@
-import { Application } from "pixi.js";
+import { Application, BaseTexture, SCALE_MODES } from "pixi.js";
 
 export class DrawingEngine extends Application {
   constructor() {
@@ -6,5 +6,6 @@ export class DrawingEngine extends Application {
     (globalThis as any).__PIXI_APP__ = this;
     document.body.appendChild(this.view as HTMLCanvasElement);
     this.stage.name = "GameManager: stage";
+    BaseTexture.defaultOptions.scaleMode = SCALE_MODES.NEAREST;
   }
 }
