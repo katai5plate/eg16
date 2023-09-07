@@ -31,6 +31,13 @@ export class Scene {
     if (!entity) throw new Error("指定の Entity が存在しません: " + name);
     return entity;
   }
+  protected getEntities() {
+    const entries = [...this.entityDict.entries()];
+    return entries.reduce(
+      (p, [k, v]) => ({ ...p, [k]: v }),
+      {} as { [key: string]: Entity }
+    );
+  }
   destoroy() {
     this.stage.removeChildren();
     this.entityDict.forEach((entity) => {

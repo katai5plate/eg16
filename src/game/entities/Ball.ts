@@ -2,7 +2,7 @@ import { BitmapSprite } from "../../core/components/BitmapSprite";
 import { Entity } from "../../core/components/Entity";
 import { xy } from "../../core/utils/math";
 
-export class Player extends Entity {
+export class Ball extends Entity {
   constructor(x: number, y: number) {
     super({
       name: "player",

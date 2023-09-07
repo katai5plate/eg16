@@ -3,7 +3,7 @@ import { GameManager } from "../../core/managers/GameManager";
 import { xy } from "../../core/utils/math";
 import { Wall } from "../entities/Wall";
 import { Sphere } from "../entities/Sphere";
-import { Player } from "../entities/Player";
+import { Ball } from "../entities/Ball";
 
 export class CollisionTest extends Scene {
   constructor() {
@@ -11,7 +11,7 @@ export class CollisionTest extends Scene {
   }
   setup($: GameManager) {
     return [
-      this.addEntity(new Player(40, 67)),
+      this.addEntity(new Ball(40, 67)),
       this.addEntity(new Wall(0xffaa00, 0, 0, $.width, 0), "topWall"),
       new Wall(0xffaa00, 0, $.height, $.width, 0),
       new Wall(0xffaa00, 0, 0, 16, 96),
@@ -23,8 +23,7 @@ export class CollisionTest extends Scene {
     ];
   }
   update($: GameManager) {
-    const player = this.getEntity("player");
-    const topWall = this.getEntity("topWall");
+    const { player, topWall } = this.getEntities();
     player.setPosition((position) => xy.add(position, $.input.getAxis("WASD")));
     player.setAngle(() => $.now);
     $.hitTest(({ self, target, overlap }) => {

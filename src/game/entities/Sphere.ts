@@ -10,7 +10,6 @@ export class Sphere extends Entity {
         position: xy(x, y),
         size: xy(r, r),
         origin: xy(0.5, 0.5),
-        scale: xy(0.5, 0.5),
       },
       shape: "CIRCLE",
       render: new PaintSprite(xy(r * 2, r * 2), (ctx) => {
