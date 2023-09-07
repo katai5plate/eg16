@@ -54,7 +54,7 @@ export class Entity {
     this._collider.system?.remove(this._collider);
     this.destroyed = true;
   }
-  get position() {
+  get position(): Readonly<Point> {
     const { x, y } = this.placement.posize;
     return xy(x, y);
   }
@@ -72,7 +72,7 @@ export class Entity {
     this.placement.angle = angle;
     this.apply();
   }
-  get scale() {
+  get scale(): Readonly<Point> {
     return this.placement.scale;
   }
   setScale(fn: (prev: Point) => Point) {
@@ -81,7 +81,7 @@ export class Entity {
     this.placement.scale.y = y;
     this.apply();
   }
-  get origin() {
+  get origin(): Readonly<Point> {
     return this.placement.origin;
   }
   setOrigin(fn: (prev: Point) => Point) {
@@ -90,7 +90,7 @@ export class Entity {
     this.placement.origin.y = y;
     this.apply();
   }
-  apply() {
+  protected apply() {
     if (this.destroyed) return;
     const { posize, angle, scale, origin } = this.placement;
     this._render.position.set(posize.x, posize.y);

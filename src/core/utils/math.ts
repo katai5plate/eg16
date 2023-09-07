@@ -9,7 +9,7 @@ export interface PointLike {
 }
 /** `Point` を作成 */
 export const xy = (x: number, y: number) => new Point(x, y);
-/** `{x, y}` から `Point` に変換 */
+/** `{x, y}` から `Point` に変換、または複製する */
 xy.from = (p: PointLike) => xy(p.x, p.y);
 /** 加算 */
 xy.add = (from: PointLike, to: PointLike) =>
