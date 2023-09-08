@@ -1,11 +1,11 @@
 import fs from "fs";
+import { ASSETS_DIR, GAME_ASSETS_DIR } from "./constants.js";
 
-const ASSETS_DIR = "src/game/assets";
-const BITMAP_DIR = `${ASSETS_DIR}/_bitmaps`;
-const BITMAP_DIST = `./${ASSETS_DIR}/bitmaps.json`;
+const BITMAP_DIR = `${ASSETS_DIR}/bitmaps`;
+const DIST_PATH = `./${GAME_ASSETS_DIR}/bitmaps.json`;
 
 fs.writeFileSync(
-  BITMAP_DIST,
+  DIST_PATH,
   JSON.stringify(
     fs
       .readdirSync(BITMAP_DIR)
@@ -55,4 +55,4 @@ fs.writeFileSync(
       }, {})
   )
 );
-console.log(`\t--> ${BITMAP_DIST}`);
+console.log(`\t--> ${DIST_PATH}`);

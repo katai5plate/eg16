@@ -30,6 +30,10 @@ xy.mod = (from: PointLike, to: PointLike) =>
 /** `Rectangle` を作成 */
 export const xywh = (x: number, y: number, w: number, h: number) =>
   new Rectangle(x, y, w, h);
+/** 座標を抽出 */
+xywh.xy = (rect: Rectangle) => xy(rect.x, rect.y);
+/** 幅高を抽出 */
+xywh.wh = (rect: Rectangle) => xy(rect.width, rect.height);
 
 /** `[x, y, x, y, ...]` を `[{x, y}, {x, y}, ...]` に変換 */
 export const numsToPoints = (nums: number[]) =>
@@ -40,3 +44,21 @@ export const testPointInRect = (point: Point, rect: Rectangle) =>
   point.x <= rect.x + rect.width &&
   point.y >= rect.y &&
   point.y <= rect.y + rect.height;
+
+/**
+ * 基準となる矩形の中心に置く場合の左上座標を計算
+ * @param selfSize 計算する矩形
+ * @param target 基準にする矩形 (Point なら幅高のみ)
+ */
+export const calcCenterPosition = (
+  selfSize: Point,
+  target: Point | Rectangle
+) => {
+  if (target instanceof Point) {
+    return xy((target.x - selfSize.x) / 2, (target.y - selfSize.y) / 2);
+  }
+  return xy(
+    target.x + (target.width - selfSize.x) / 2,
+    target.y + (target.height - selfSize.y) / 2
+  );
+};

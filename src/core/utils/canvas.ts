@@ -24,25 +24,25 @@ export const strokeIn = (
   strokeLast && ctx.stroke();
   ctx.strokeStyle = strokeStyle;
 };
-export const textIn = (
-  ctx: CanvasRenderingContext2D,
-  px: number,
-  align: CanvasTextAlign,
-  baseline: CanvasTextBaseline,
-  fn: () => void,
-  fontType: "DEFAULT" | "CUSTOM" = "DEFAULT"
-) => {
-  const { font, textAlign, textBaseline, imageSmoothingEnabled } = ctx;
-  ctx.imageSmoothingEnabled = false;
-  ctx.font = `${px}px ${fontType === "DEFAULT" ? "GameFont" : "CustomFont"}`;
-  ctx.textAlign = align;
-  ctx.textBaseline = baseline;
-  fn();
-  ctx.imageSmoothingEnabled = imageSmoothingEnabled;
-  ctx.font = font;
-  ctx.textAlign = textAlign;
-  ctx.textBaseline = textBaseline;
-};
+// export const textIn = (
+//   ctx: CanvasRenderingContext2D,
+//   px: number,
+//   align: CanvasTextAlign,
+//   baseline: CanvasTextBaseline,
+//   fn: () => void,
+//   fontType: "DEFAULT" | "CUSTOM" = "DEFAULT"
+// ) => {
+//   const { font, textAlign, textBaseline, imageSmoothingEnabled } = ctx;
+//   ctx.imageSmoothingEnabled = false;
+//   ctx.font = `${px}px ${fontType === "DEFAULT" ? "GameFont" : "CustomFont"}`;
+//   ctx.textAlign = align;
+//   ctx.textBaseline = baseline;
+//   fn();
+//   ctx.imageSmoothingEnabled = imageSmoothingEnabled;
+//   ctx.font = font;
+//   ctx.textAlign = textAlign;
+//   ctx.textBaseline = textBaseline;
+// };
 
 const roundedRect = (
   ctx: CanvasRenderingContext2D,

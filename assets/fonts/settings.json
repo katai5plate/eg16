@@ -1,0 +1,14 @@
+{
+  "main.ttf": {
+    "name": "GameFont",
+    "format": "truetype",
+    "scale": 1,
+    "dist": "core",
+    "chars": {
+      "kigou": true,
+      "english": true,
+      "kana": true,
+      "kanji": true
+    }
+  }
+}

@@ -1,8 +1,9 @@
 import { Rectangle } from "pixi.js";
 import { Entity } from "core/components/Entity";
 import { PaintSprite } from "core/components/PaintSprite";
-import { xy, xywh } from "core/utils/math";
-import { fillIn, fillRoundedRect, textIn } from "core/utils/canvas";
+import { calcCenterPosition, xy, xywh } from "core/utils/math";
+import { fillRoundedRect } from "core/utils/canvas";
+import { TextCanvas } from "core/canvases/TextCanvas";
 
 export class Button extends Entity {
   constructor(
@@ -12,16 +13,16 @@ export class Button extends Entity {
       backgroundColor = 0xffffff,
       textColor = 0x000000,
       borderRadius = 8,
-      textScale = 1,
       padding = 1,
     }: {
       backgroundColor?: number;
       textColor?: number;
       borderRadius?: number;
-      textScale?: number;
       padding?: number;
     } = {}
   ) {
+    const textCanvas = new TextCanvas(text, textColor);
+    const tcpos = calcCenterPosition(textCanvas.size, xywh.wh(rect));
     const render = new PaintSprite(xy(rect.width, rect.height), (ctx) => {
       fillRoundedRect(
         ctx,
@@ -34,11 +35,7 @@ export class Button extends Entity {
         ),
         borderRadius
       );
-      fillIn(ctx, textColor, () => {
-        textIn(ctx, 8 * textScale, "center", "middle", () => {
-          ctx.fillText(text, rect.width / 2, rect.height / 2);
-        });
-      });
+      ctx.drawImage(textCanvas.canvas, tcpos.x, tcpos.y);
     });
     super({
       name: "button",

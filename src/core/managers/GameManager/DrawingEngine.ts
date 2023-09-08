@@ -1,5 +1,5 @@
 import { Application, BaseTexture, SCALE_MODES } from "pixi.js";
-import fonts from "root/fonts.json";
+import fonts from "root/assets/fonts/settings.json";
 
 export class DrawingEngine extends Application {
   constructor() {
@@ -10,8 +10,8 @@ export class DrawingEngine extends Application {
 
     const style = document.createElement("style");
     style.innerHTML = Object.entries(fonts).reduce(
-      (p, [k, v]) =>
-        `${p}\n@font-face { font-family: "${k}"; src: url("./fonts/${v.file}") format("${v.format}"); }`,
+      (p, [file, v]) =>
+        `${p}\n@font-face { font-family: "${v.name}"; src: url("./fonts/${file}") format("${v.format}"); }`,
       ""
     );
     document.head.appendChild(style);

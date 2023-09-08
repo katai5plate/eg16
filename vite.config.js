@@ -1,13 +1,13 @@
 import Unfonts from "unplugin-fonts/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
-import fonts from "./fonts.json";
+import fontSettings from "./assets/fonts/settings.json";
 import { defineConfig } from "vite";
 
-const families = Object.entries(fonts).reduce(
-  (p, [k, v]) => ({
+const families = Object.entries(fontSettings).reduce(
+  (p, [file, v]) => ({
     ...p,
-    [k]: {
-      src: `./public/fonts/${v.file}`,
+    [v.name]: {
+      src: `./public/fonts/${file}`,
     },
   }),
   {}
