@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && node scripts/distSize",
     "preview": "vite preview",
     "build-a": "npm run assets && npm run build",
+    "build-p": "npm run build && npm run preview",
     "build-ap": "npm run build-a && npm run preview",
     "assets": "npm run bitmap && npm run font",
     "bitmap": "node scripts/convertBitmap",
