@@ -1,5 +1,16 @@
 {
   "main.ttf": {
+    "#": [
+      "美咲ゴシック第2",
+      "",
+      "Copyright(C) 2002-2021 Num Kadoma",
+      "",
+      "These fonts are free softwares.",
+      "",
+      "Unlimited permission is granted to use, copy, and distribute it,",
+      "with or without modification, either commercially and noncommercially.",
+      "THESE FONTS ARE PROVIDED \"AS IS\" WITHOUT WARRANTY."
+    ],
     "name": "GameFont",
     "format": "truetype",
     "scale": 1,
