@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "build-a": "npm run assets && npm run build",
+    "build-ap": "npm run build-a && npm run preview",
     "assets": "npm run bitmap && npm run font",
     "bitmap": "node scripts/convertBitmap",
     "font": "node scripts/convertFont"

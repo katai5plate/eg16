@@ -166,7 +166,15 @@ for (const FILE_NAME_EXT of fs
     ...(SETTING.chars.kana ? BASIC_CHARS.kana : ""),
     ...(SETTING.chars.kanji ? BASIC_CHARS.kanji : ""),
   ]);
-  fs.writeFileSync(DIST_PATH, JSON.stringify({ ...SETTING, table }));
+  fs.writeFileSync(
+    DIST_PATH,
+    JSON.stringify({
+      "#": SETTING["#"],
+      scale: SETTING.scale,
+      format: SETTING.format,
+      table,
+    })
+  );
 }
 
 console.log("\n完了！");
