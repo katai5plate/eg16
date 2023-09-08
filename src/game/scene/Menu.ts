@@ -8,7 +8,7 @@ export class Menu extends Scene {
     super("main");
   }
   setup(_$: GameManager) {
-    return [this.addEntity(new Button(xywh(32, 16, 64, 16), "判定テスト"))];
+    return [this.addEntity(new Button(xywh(32, 16, 64, 16), "判定蟹テスト"))];
   }
   update($: GameManager) {
     const { button } = this.getEntities();

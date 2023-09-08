@@ -37,12 +37,18 @@ export class TextCanvas {
     for (let i = 0; i < textTable.length; i++) {
       const { isHalf, content } = textTable[i];
       const currentSize = isHalf ? this.fontSize / 2 : this.fontSize;
-      console.log(currentX);
       for (let y = 0; y < this.fontSize; y++) {
         for (let x = 0; x < currentSize; x++) {
-          ctx.fillStyle = `#${color.toString(16).padStart(6, "0")}`;
-          if (content[y][x] === 1) {
+          if (!content) {
+            ctx.fillStyle = `#${((Math.random() * 0xffffff) | 0)
+              .toString(16)
+              .padStart(6, "0")}`;
             ctx.fillRect(currentX + x, y, 1, 1);
+          } else {
+            ctx.fillStyle = `#${color.toString(16).padStart(6, "0")}`;
+            if (content[y][x] === 1) {
+              ctx.fillRect(currentX + x, y, 1, 1);
+            }
           }
         }
       }
@@ -74,7 +80,7 @@ export class TextCanvas {
       const content = binaryRows.map((row) => [...row].map(Number));
       return { isHalf, content };
     } catch {
-      return { isHalf: false, content: [] };
+      return { isHalf: false, content: null };
     }
   }
 }

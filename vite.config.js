@@ -1,17 +1,5 @@
-import Unfonts from "unplugin-fonts/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
-import fontSettings from "./assets/fonts/settings.json";
 import { defineConfig } from "vite";
-
-const families = Object.entries(fontSettings).reduce(
-  (p, [file, v]) => ({
-    ...p,
-    [v.name]: {
-      src: `./public/fonts/${file}`,
-    },
-  }),
-  {}
-);
 
 export default defineConfig({
   base: "./",
@@ -32,12 +20,5 @@ export default defineConfig({
       },
     },
   },
-  plugins: [
-    Unfonts({
-      custom: {
-        families,
-      },
-    }),
-    tsconfigPaths(),
-  ],
+  plugins: [tsconfigPaths()],
 });
