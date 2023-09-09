@@ -1,4 +1,4 @@
-import { Point, Rectangle } from "pixi.js";
+import { Point, Rectangle } from "PIXI";
 
 export const calc = <T>(target: T, fn: (prev: T) => T) => fn(target);
 

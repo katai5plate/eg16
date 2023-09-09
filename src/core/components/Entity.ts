@@ -1,5 +1,5 @@
 import { Body, Box, Ellipse, SATVector, deg2rad } from "detect-collisions";
-import { Point, Rectangle, Sprite } from "pixi.js";
+import { Point, Rectangle, Sprite } from "PIXI";
 import { xy } from "core/utils/math";
 import { Placement, PlacementProps } from "./Placement";
 

@@ -1,4 +1,4 @@
-import { Rectangle } from "pixi.js";
+import { Rectangle } from "PIXI";
 import { Entity } from "core/components/Entity";
 import { PaintSprite } from "core/components/PaintSprite";
 import { calcCenterPosition, xy, xywh } from "core/utils/math";

@@ -1,4 +1,4 @@
-import { Point, SCALE_MODES, Sprite, Texture } from "pixi.js";
+import { Point, SCALE_MODES, Sprite, Texture } from "PIXI";
 
 export class PaintSprite extends Sprite {
   constructor(

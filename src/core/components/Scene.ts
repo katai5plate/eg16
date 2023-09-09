@@ -1,4 +1,4 @@
-import { Container } from "pixi.js";
+import { Container } from "PIXI";
 import { GameManager } from "core/managers/GameManager";
 import { Entity } from "./Entity";
 

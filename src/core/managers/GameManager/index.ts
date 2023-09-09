@@ -1,5 +1,5 @@
 import { Body } from "detect-collisions";
-import { Point, Sprite } from "pixi.js";
+import { Point, Sprite } from "PIXI";
 import { InputManager } from "core/managers/InputManager";
 import { Entity } from "core/components/Entity";
 import { xy } from "core/utils/math";

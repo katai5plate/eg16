@@ -1,4 +1,4 @@
-import { Rectangle } from "pixi.js";
+import { Rectangle } from "PIXI";
 
 export const fillIn = (
   ctx: CanvasRenderingContext2D,

@@ -1,4 +1,4 @@
-import { Point, Rectangle } from "pixi.js";
+import { Point, Rectangle } from "PIXI";
 import { xywh, xy } from "core/utils/math";
 
 export interface PlacementProps {

@@ -1,4 +1,4 @@
-import { Container, Point, Sprite, Texture } from "pixi.js";
+import { Container, Point, Sprite, Texture } from "PIXI";
 import { xy } from "core/utils/math";
 import { ToReadonlyMap } from "core/utils/type";
 

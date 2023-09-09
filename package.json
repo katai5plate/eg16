@@ -16,13 +16,13 @@
   },
   "devDependencies": {
     "@types/node": "^20.5.9",
+    "canvas": "^2.11.2",
     "typescript": "^5.0.2",
     "unplugin-fonts": "^1.0.3",
     "vite": "^4.4.5",
     "vite-tsconfig-paths": "^4.2.0"
   },
   "dependencies": {
-    "canvas": "^2.11.2",
     "detect-collisions": "^9.1.1",
     "keycode": "^2.2.1",
     "pixi.js": "^7.2.4",

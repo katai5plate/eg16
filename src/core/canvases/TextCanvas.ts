@@ -1,6 +1,6 @@
 import MAIN_FONT_DATA from "core/assets/font.main.json";
 import { xy } from "core/utils/math";
-import { Point } from "pixi.js";
+import { Point } from "PIXI";
 
 const toPerfectTable = (table: Record<string, string>) => ({
   ...table,

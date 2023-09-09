@@ -3,13 +3,6 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   base: "./",
-  resolve: {
-    alias: {
-      "~/": `${__dirname}/`,
-      "core/": `${__dirname}/src/core/`,
-      "game/": `${__dirname}/src/game/`,
-    },
-  },
   build: {
     outDir: "docs",
     rollupOptions: {
