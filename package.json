@@ -25,10 +25,15 @@
     "vite-tsconfig-paths": "^4.2.0"
   },
   "dependencies": {
+    "@pixi/app": "^7.2.4",
+    "@pixi/core": "^7.2.4",
+    "@pixi/display": "^7.2.4",
+    "@pixi/events": "^7.2.4",
+    "@pixi/mixin-get-child-by-name": "^7.2.4",
+    "@pixi/sprite": "^7.2.4",
     "detect-collisions": "^9.1.1",
     "keycode": "^2.2.1",
     "lz-string": "^1.5.0",
-    "pixi.js": "^7.2.4",
     "ts-key-enum": "^2.0.12"
   }
 }
