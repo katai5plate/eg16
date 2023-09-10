@@ -167,7 +167,10 @@ for (const FILE_NAME_EXT of fs
     ...(SETTING.chars.kana ? BASIC_CHARS.kana : ""),
     ...(SETTING.chars.kanji ? BASIC_CHARS.kanji : ""),
   ]);
-  const table = LZString.compressToBase64(JSON.stringify(tableData));
+  const table = LZString.compressToBase64(JSON.stringify(tableData)).replace(
+    /=+$/,
+    ""
+  );
   fs.writeFileSync(
     DIST_PATH,
     JSON.stringify({
