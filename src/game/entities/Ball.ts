@@ -1,4 +1,4 @@
-import { BitmapSprite } from "core/components/BitmapSprite";
+import { ImageSprite } from "core/components/ImageSprite";
 import { Entity } from "core/components/Entity";
 import { xy } from "core/utils/math";
 
@@ -13,7 +13,7 @@ export class Ball extends Entity {
         scale: xy(2, 2),
       },
       shape: "BOX",
-      render: new BitmapSprite("ball", true),
+      render: new ImageSprite("ball", { antialias: true }),
     });
   }
 }

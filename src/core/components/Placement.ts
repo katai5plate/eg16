@@ -3,7 +3,7 @@ import { xywh, xy } from "core/utils/math";
 
 export interface PlacementProps {
   position: Point;
-  size: Point;
+  size?: Point;
   angle?: number;
   scale?: Point;
   origin?: Point;
@@ -22,7 +22,7 @@ export class Placement {
     scale = xy(1, 1),
     origin = xy(0, 0),
   }: PlacementProps) {
-    this.posize = xywh(position.x, position.y, size.x, size.y);
+    this.posize = xywh(position.x, position.y, size?.x ?? 0, size?.y ?? 0);
     this.angle = angle;
     this.scale = scale;
     this.origin = origin;

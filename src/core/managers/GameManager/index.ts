@@ -81,7 +81,7 @@ export class GameManager {
    * @param entity
    */
   spawn(entity: Entity) {
-    this.physicsEngine.insert(entity.collider as Body);
+    if (entity.collider) this.physicsEngine.insert(entity.collider as Body);
     this.currentScene.stage.addChild(entity.render as Sprite);
   }
   get input(): Readonly<typeof this._input> {

@@ -4,6 +4,7 @@ import { xy } from "core/utils/math";
 import { Wall } from "game/entities/Wall";
 import { Sphere } from "game/entities/Sphere";
 import { Ball } from "game/entities/Ball";
+import { Background } from "game/entities/Background";
 
 export class CollisionTest extends Scene {
   constructor() {
@@ -11,6 +12,7 @@ export class CollisionTest extends Scene {
   }
   setup($: GameManager) {
     return [
+      this.addEntity(new Background()),
       this.addEntity(new Ball(40, 67)),
       this.addEntity(new Wall(0xffaa00, 0, 0, $.width, 0), "topWall"),
       new Wall(0xffaa00, 0, $.height, $.width, 0),

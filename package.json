@@ -10,13 +10,15 @@
     "build-a": "npm run assets && npm run build",
     "build-p": "npm run build && npm run preview",
     "build-ap": "npm run build-a && npm run preview",
-    "assets": "npm run bitmap && npm run font",
-    "bitmap": "node scripts/convertBitmap",
-    "font": "node scripts/convertFont"
+    "assets": "npm run image && npm run font",
+    "image": "node scripts/convertImages",
+    "font": "node scripts/convertFonts"
   },
   "devDependencies": {
     "@types/node": "^20.5.9",
+    "@types/pngjs": "^6.0.1",
     "canvas": "^2.11.2",
+    "pngjs": "^7.0.0",
     "typescript": "^5.0.2",
     "unplugin-fonts": "^1.0.3",
     "vite": "^4.4.5",
@@ -25,6 +27,7 @@
   "dependencies": {
     "detect-collisions": "^9.1.1",
     "keycode": "^2.2.1",
+    "lz-string": "^1.5.0",
     "pixi.js": "^7.2.4",
     "ts-key-enum": "^2.0.12"
   }

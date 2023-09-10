@@ -7,7 +7,7 @@ interface EntityProps {
   name: string;
   placement: PlacementProps;
   // Polygon は動作が不安定なので使用を制限する
-  shape: "BOX" | "CIRCLE";
+  shape: "BOX" | "CIRCLE" | "NONE";
   render: Sprite;
 }
 
@@ -16,7 +16,7 @@ export class Entity {
   protected destroyed: boolean = false;
 
   protected _name: string;
-  protected _collider: Body;
+  protected _collider: Body | null;
   protected _render: Sprite;
 
   constructor({ name, placement, shape, render }: EntityProps) {
@@ -28,16 +28,18 @@ export class Entity {
     if (shape === "BOX")
       this._collider = new Box(
         placement.position,
-        placement.size.x,
-        placement.size.y
+        placement.size?.x ?? this._render.width,
+        placement.size?.y ?? this._render.height
       );
     else if (shape === "CIRCLE")
       this._collider = new Ellipse(
         placement.position,
-        placement.size.x,
-        placement.size.y
+        placement.size?.x ?? this._render.width,
+        placement.size?.y ?? this._render.height
       );
-    else throw new Error("無効な形状タイプ");
+    else if (shape === "NONE") {
+      this._collider = null;
+    } else throw new Error("無効な形状タイプ");
     this.apply();
   }
   get name() {
@@ -54,7 +56,7 @@ export class Entity {
   }
   destroy() {
     this._render.destroy();
-    this._collider.system?.remove(this._collider);
+    if (this._collider) this._collider.system?.remove(this._collider);
     this.destroyed = true;
   }
   get position(): Readonly<Point> {
@@ -97,26 +99,28 @@ export class Entity {
     if (this.destroyed) return;
     const { posize, angle, scale, origin } = this.placement;
     this._render.position.set(posize.x | 0, posize.y | 0);
-    this._collider.setPosition(posize.x, posize.y);
     this._render.angle = angle;
-    this._collider.setAngle(deg2rad(angle));
     this._render.scale.set(scale.x, scale.y);
-    this._collider.setScale(scale.x, scale.y);
     this._render.anchor.set(origin.x, origin.y);
-    if (this._collider.type === "Ellipse") {
-      this._collider.setOffset(
-        new SATVector(
-          posize.width * scale.x * (1 - 2 * origin.x),
-          posize.height * scale.y * (1 - 2 * origin.y)
-        )
-      );
-    } else {
-      this._collider.setOffset(
-        new SATVector(
-          posize.width * scale.x * -origin.x,
-          posize.height * scale.y * -origin.y
-        )
-      );
+    if (this._collider) {
+      this._collider.setPosition(posize.x, posize.y);
+      this._collider.setAngle(deg2rad(angle));
+      this._collider.setScale(scale.x, scale.y);
+      if (this._collider.type === "Ellipse") {
+        this._collider.setOffset(
+          new SATVector(
+            posize.width * scale.x * (1 - 2 * origin.x),
+            posize.height * scale.y * (1 - 2 * origin.y)
+          )
+        );
+      } else {
+        this._collider.setOffset(
+          new SATVector(
+            posize.width * scale.x * -origin.x,
+            posize.height * scale.y * -origin.y
+          )
+        );
+      }
     }
   }
 }
