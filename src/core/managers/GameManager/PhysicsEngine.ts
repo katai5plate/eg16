@@ -7,7 +7,10 @@ export class PhysicsEngine extends System {
   protected physicsDebugCanvas?: HTMLCanvasElement;
   protected physicsDebugContext?: CanvasRenderingContext2D;
 
-  constructor(drawingEngine: DrawingEngine, options?: { physicsDebug: true }) {
+  constructor(
+    drawingEngine: DrawingEngine,
+    options?: { physicsDebug: boolean }
+  ) {
     super();
 
     if (options?.physicsDebug) {

@@ -19,11 +19,14 @@ export class GameManager {
 
   protected _input: InputManager;
 
-  constructor(scenes: Scene[]) {
+  constructor(
+    scenes: Scene[],
+    { debugMode = import.meta.env.DEV }: Partial<{ debugMode: boolean }> = {}
+  ) {
     this.drawingEngine = new DrawingEngine();
 
     this.physicsEngine = new PhysicsEngine(this.drawingEngine, {
-      physicsDebug: true,
+      physicsDebug: debugMode,
     });
 
     this._input = new InputManager(
@@ -41,6 +44,29 @@ export class GameManager {
     this.connectScene();
 
     this.drawingEngine.ticker.add((delta) => this.update(delta));
+
+    if (debugMode) {
+      (globalThis as any).__DEBUG__ = this;
+
+      const memoryState = {
+        prevHeap: 0,
+        currentHeap: 0,
+      };
+      setInterval(() => {
+        memoryState.prevHeap = memoryState.currentHeap;
+        memoryState.currentHeap =
+          ((globalThis as any).performance.memory.totalJSHeapSize /
+            (1024 * 2)) |
+          0;
+        const diff = memoryState.prevHeap - memoryState.currentHeap;
+        diff !== 0 &&
+          console.log(
+            `RAM: ${memoryState.currentHeap} MB (${
+              diff > 0 ? "+" : "-"
+            }${Math.abs(diff)})`
+          );
+      }, 1000);
+    }
   }
   update(delta: number) {
     this.deltaTime = delta;
