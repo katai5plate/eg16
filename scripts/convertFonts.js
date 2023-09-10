@@ -1,5 +1,6 @@
 import { createCanvas, registerFont } from "canvas";
 import fs from "fs";
+import LZString from "lz-string";
 import {
   ASSETS_DIR,
   BASIC_CHARS,
@@ -159,13 +160,14 @@ for (const FILE_NAME_EXT of fs
     return fontMap;
   }
 
-  // const table = generateFontArray([..."うえ$%#■〠"]);
-  const table = generateFontArray([
+  // const tableData = generateFontArray([..."うえ$%#■〠"]);
+  const tableData = generateFontArray([
     ...(SETTING.chars.kigou ? BASIC_CHARS.kigou : ""),
     ...(SETTING.chars.english ? BASIC_CHARS.english : ""),
     ...(SETTING.chars.kana ? BASIC_CHARS.kana : ""),
     ...(SETTING.chars.kanji ? BASIC_CHARS.kanji : ""),
   ]);
+  const table = LZString.compressToBase64(JSON.stringify(tableData));
   fs.writeFileSync(
     DIST_PATH,
     JSON.stringify({

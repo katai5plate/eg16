@@ -1,8 +1,8 @@
 import { SCALE_MODES, Sprite, Texture } from "PIXI";
+import { decompressFromBase64 } from "lz-string";
 import { BASE92_TABLE } from "core/constants.json";
 import { DecompressedBitmap, ImagesJSON } from "core/utils/type";
 import images from "game/assets/images.json";
-import { decompressFromBase64 } from "lz-string";
 
 const IMAGES_JSON = images as ImagesJSON<typeof images>;
 

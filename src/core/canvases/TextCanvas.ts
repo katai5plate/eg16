@@ -1,6 +1,7 @@
+import { Point } from "PIXI";
+import { decompressFromBase64 } from "lz-string";
 import MAIN_FONT_DATA from "core/assets/font.main.json";
 import { xy } from "core/utils/math";
-import { Point } from "PIXI";
 
 const toPerfectTable = (table: Record<string, string>) => ({
   ...table,
@@ -16,7 +17,9 @@ export class TextCanvas {
 
   constructor(text: string, color: number, fontData = MAIN_FONT_DATA) {
     this._canvas = document.createElement("canvas");
-    const table = toPerfectTable(fontData.table);
+    const table = toPerfectTable(
+      JSON.parse(decompressFromBase64(fontData.table))
+    );
     this.fontSize = fontData.scale * 8;
     this.binarySize = Number(`0b${"1".repeat(this.fontSize)}`).toString(
       16
