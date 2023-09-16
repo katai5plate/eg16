@@ -8,12 +8,15 @@ export class Menu extends Scene {
     super("main");
   }
   setup(_$: GameManager) {
-    return [this.addEntity(new Button(xywh(32, 16, 64, 16), "判定テスト"))];
+    return [
+      this.addEntity(new Button(xywh(32, 16, 64, 16), "判定テスト")),
+      this.addEntity(new Button(xywh(32, 32, 64, 16), "BREAK OUT!")),
+    ];
   }
   update($: GameManager) {
     const { button } = this.getEntities();
     if (testPointInRect($.input.getMousePosition(), button.globalRect)) {
-      $.input.isMouseTriggered("LEFT") && $.changeScene("col-test");
+      $.input.isMouseTriggered("LEFT") && $.changeScene("breakout");
     }
   }
 }
