@@ -13,3 +13,7 @@ export interface DecompressedBitmap {
   palette: string;
   pixels: string;
 }
+
+export type ExtractKeysOfType<T, V> = {
+  [K in keyof T]: T[K] extends V ? K : never;
+}[keyof T];

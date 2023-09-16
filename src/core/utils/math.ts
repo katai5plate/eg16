@@ -1,4 +1,5 @@
 import { Point, Rectangle } from "PIXI";
+import { ExtractKeysOfType } from "core/utils/type";
 
 export const calc = <T>(target: T, fn: (prev: T) => T) => fn(target);
 
@@ -26,6 +27,12 @@ xy.div = (from: PointLike, to: PointLike) =>
 /** 剰余 */
 xy.mod = (from: PointLike, to: PointLike) =>
   xy.from(calc(from, (prev) => xy(prev.x % to.x, prev.y % to.y)));
+/** オブジェクトから座標を抽出 */
+xy.pick = <T extends object>(
+  obj: T,
+  keyX?: ExtractKeysOfType<T, number>,
+  keyY?: ExtractKeysOfType<T, number>
+): Point => xy(keyX ? obj[keyX] : 0, keyY ? obj[keyY] : 0);
 
 /** `Rectangle` を作成 */
 export const xywh = (x: number, y: number, w: number, h: number) =>
@@ -34,6 +41,20 @@ export const xywh = (x: number, y: number, w: number, h: number) =>
 xywh.xy = (rect: Rectangle) => xy(rect.x, rect.y);
 /** 幅高を抽出 */
 xywh.wh = (rect: Rectangle) => xy(rect.width, rect.height);
+/** オブジェクトから Rectangle を抽出 */
+xywh.pick = <T extends object>(
+  obj: T,
+  keyX?: ExtractKeysOfType<T, number>,
+  keyY?: ExtractKeysOfType<T, number>,
+  keyW?: ExtractKeysOfType<T, number>,
+  keyH?: ExtractKeysOfType<T, number>
+) =>
+  xywh(
+    keyX ? obj[keyX] : 0,
+    keyY ? obj[keyY] : 0,
+    keyW ? obj[keyW] : 0,
+    keyH ? obj[keyH] : 0
+  );
 
 /** `[x, y, x, y, ...]` を `[{x, y}, {x, y}, ...]` に変換 */
 export const numsToPoints = (nums: number[]) =>
